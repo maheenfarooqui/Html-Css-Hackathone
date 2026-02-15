@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saylani Campus Portal – Submit Complaint</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      /* Exact Color Codes provided */
+      :root {
+        --saylani-green: #66b032;
+        --saylani-blue: #0057a8;
+        --saylani-white: #ffffff;
+        --light-bg: #f8f9fa;
+        --text-dark: #333333;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        overflow-x: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Sidebar Styling (Matches Student Page style) */
+      .sidebar {
+        background-color: #ffffff;
+        min-height: 100vh;
+        padding-top: 20px;
+        border-right: 1px solid #eee;
+      }
+
+      .sidebar .nav-link {
+        color: #555;
+        font-weight: 600;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 4px;
+        border-radius: 0 24px 24px 0;
+        margin-right: 16px;
+        transition: all 0.2s;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: #f0f0f0;
+        color: var(--saylani-green);
+      }
+
+      /* Active State for this page (assuming Complaints link is active?) */
+      /* Or just reuse the style but apply active class manually */
+      .sidebar .nav-link.active {
+        background-color: var(--saylani-green);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 176, 50, 0.2);
+      }
+
+      .sidebar .nav-link i {
+        font-size: 1.2rem;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        padding: 30px;
+      }
+
+      /* Section Headers */
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Form Card */
+      .form-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+      }
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--saylani-green);
+        box-shadow: 0 0 0 4px rgba(102, 176, 50, 0.1);
+      }
+
+      /* Urgency Styling */
+      .urgency-group {
+        display: flex;
+        gap: 20px;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px 20px;
+        align-items: center;
+      }
+      .urgency-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .urgency-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .dot-low {
+        background-color: var(--saylani-green);
+      }
+      .dot-medium {
+        background-color: #ffc107;
+      } /* Yellow/Medium */
+      .dot-high {
+        background-color: #dc3545;
+      } /* Red/High */
+
+      /* Submit Button */
+      .btn-submit {
+        background-color: #2563eb; /* Royal Blue */
+        color: white;
+        padding: 12px 40px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 300px;
+        display: block;
+        margin: 30px auto 0;
+      }
+      .btn-submit:hover {
+        background-color: #1d4ed8;
+      }
+
+      /* History Table Section */
+      .history-section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .history-filters {
+        font-size: 0.85rem;
+        color: #6c757d;
+        font-weight: 500;
+      }
+
+      .table-container {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      }
+
+      .table thead th {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        font-weight: 600;
+        border-bottom: 1px solid #dee2e6;
+        padding: 15px 20px;
+      }
+
+      .table tbody td {
+        padding: 15px 20px;
+        vertical-align: middle;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .status-badge {
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        min-width: 90px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+      .status-resolved {
+        background-color: #d1e7dd;
+        color: #0f5132;
+      }
+
+      /* Layout overrides */
+      @media (min-width: 992px) {
+        .sidebar {
+          position: fixed;
+          width: 250px;
+          z-index: 100;
+        }
+        .main-content {
+          margin-left: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar d-none d-lg-block">
+      <div class="px-4 mb-4">
+        <!-- Logo area placeholder -->
+      </div>
+
+      <div class="nav flex-column">
+        <a class="nav-link" href="student.html"
+          ><i class="bi bi-grid"></i> Dashboard</a
+        >
+        <a class="nav-link" href="report_lost_item.html"
+          ><i class="bi bi-search"></i> Lost &amp; Found</a
+        >
+        <a class="nav-link active" href="submit_complaint.html"
+          ><i class="bi bi-file-earmark-text"></i> Complaints</a
+        >
+        <a class="nav-link" href="student_volunteers.html"
+          ><i class="bi bi-people"></i> Volunteers</a
+        >
+        <a class="nav-link" href="student_notifications.html"
+          ><i class="bi bi-bell"></i> Notifications</a
+        >
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container-fluid">
+        <!-- Header with Back Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="section-title mb-0">
+            <i class="bi bi-pencil-square text-success"></i> Submit Complaint
+          </h2>
+          <a
+            href="student.html"
+            class="btn btn-sm btn-outline-secondary"
+            style="font-size: 0.75rem; padding: 4px 10px"
+            >Back to Dashboard</a
+          >
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <!-- Complaint Form -->
+            <div class="form-card">
+              <form>
+                <!-- Complaint Title -->
+                <div class="mb-4">
+                  <label class="form-label">Complaint Title</label>
+                  <input type="text" class="form-control" placeholder="" />
+                </div>
+
+                <!-- Category -->
+                <div class="mb-4">
+                  <label class="form-label">Category</label>
+                  <select class="form-select">
+                    <option>Facilities</option>
+                    <option>Academic</option>
+                    <option>Hostel</option>
+                  </select>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                  <!-- Label not explicitly shown for description textarea inside box in image, but standard UI has label or placeholder -->
+                  <textarea
+                    class="form-control"
+                    placeholder="Description"
+                    style="height: 100px; resize: none"
+                  ></textarea>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-4">
+                  <label class="form-label">Location</label>
+                  <select class="form-select">
+                    <option>Select Location</option>
+                    <option>Classroom A</option>
+                    <option>Library</option>
+                  </select>
+                </div>
+
+                <!-- Urgency -->
+                <div class="mb-4 d-flex align-items-center gap-3">
+                  <label class="form-label mb-0"
+                    ><i
+                      class="bi bi-exclamation-square-fill text-success me-2"
+                    ></i>
+                    Urgency</label
+                  >
+                  <div
+                    class="urgency-group flex-grow-1"
+                    style="max-width: 400px"
+                  >
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input mt-0"
+                        type="radio"
+                        name="urgency"
+                        id="low"
+                        checked
+                      />
+                      <span class="urgency-dot dot-low"></span> Low
+                    </label>
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input mt-0"
+                        type="radio"
+                        name="urgency"
+                        id="medium"
+                      />
+                      <span class="urgency-dot dot-medium"></span> Medium
+                    </label>
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input mt-0"
+                        type="radio"
+                        name="urgency"
+                        id="high"
+                      />
+                      <span class="urgency-dot dot-high"></span> High
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit">
+                  Submit Complaint
+                </button>
+              </form>
+            </div>
+
+            <!-- History / My Complaints Table -->
+            <div class="mt-5">
+              <div class="history-section-title">
+                <span>My Complaints</span>
+                <span class="history-filters ms-auto"
+                  >Status: All | Category: All</span
+                >
+              </div>
+
+              <div class="table-container">
+                <div class="table-responsive">
+                  <table class="table mb-0">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Complaints</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>503</td>
+                        <td class="fw-bold">Wi-Fi Not Working</td>
+                        <td>Dep Newnt</td>
+                        <!-- Text from image hard to read, guessing placeholder -->
+                        <td>
+                          <span class="status-badge status-pending"
+                            >Pending</span
+                          >
+                        </td>
+                        <td><i class="bi bi-three-dots text-muted"></i></td>
+                      </tr>
+                      <tr>
+                        <td>504</td>
+                        <td class="fw-bold">Leaky Pipe</td>
+                        <td>City Park</td>
+                        <td>
+                          <span class="status-badge status-resolved"
+                            >Resolved</span
+                          >
+                        </td>
+                        <td><i class="bi bi-three-dots text-muted"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

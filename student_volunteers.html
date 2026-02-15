@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saylani Campus Portal – Student Volunteers</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      /* Exact Color Codes provided */
+      :root {
+        --saylani-green: #66b032;
+        --saylani-blue: #0057a8;
+        --saylani-white: #ffffff;
+        --light-bg: #f8f9fa;
+        --text-dark: #333333;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        overflow-x: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Sidebar Styling */
+      .sidebar {
+        background-color: #ffffff;
+        min-height: 100vh;
+        padding-top: 20px;
+        border-right: 1px solid #eee;
+      }
+
+      .sidebar .nav-link {
+        color: #555;
+        font-weight: 600;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 4px;
+        border-radius: 0 24px 24px 0;
+        margin-right: 16px;
+        transition: all 0.2s;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: #f0f0f0;
+        color: var(--saylani-green);
+      }
+
+      .sidebar .nav-link.active {
+        background-color: var(--saylani-green);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 176, 50, 0.2);
+      }
+
+      .sidebar .nav-link i {
+        font-size: 1.2rem;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        padding: 30px;
+      }
+
+      /* Section Headers */
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Volunteer Card */
+      .volunteer-card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: transform 0.2s;
+      }
+      .volunteer-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .volunteer-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        object-fit: cover;
+        background-color: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: #adb5bd;
+      }
+
+      .volunteer-name {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .volunteer-role {
+        font-size: 0.85rem;
+        color: var(--saylani-green);
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .btn-contact {
+        border: 1px solid var(--saylani-blue);
+        color: var(--saylani-blue);
+        background: transparent;
+        border-radius: 20px;
+        padding: 5px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      .btn-contact:hover {
+        background-color: var(--saylani-blue);
+        color: white;
+      }
+
+      /* Layout overrides */
+      @media (min-width: 992px) {
+        .sidebar {
+          position: fixed;
+          width: 250px;
+          z-index: 100;
+        }
+        .main-content {
+          margin-left: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar d-none d-lg-block">
+      <div class="px-4 mb-4">
+        <!-- Logo placeholder -->
+      </div>
+
+      <div class="nav flex-column">
+        <a class="nav-link" href="student.html"
+          ><i class="bi bi-grid"></i> Dashboard</a
+        >
+        <a class="nav-link" href="report_lost_item.html"
+          ><i class="bi bi-search"></i> Lost & Found</a
+        >
+        <a class="nav-link" href="submit_complaint.html"
+          ><i class="bi bi-file-earmark-text"></i> Complaints</a
+        >
+        <a class="nav-link active" href="student_volunteers.html"
+          ><i class="bi bi-people"></i> Volunteers</a
+        >
+        <a class="nav-link" href="student_notifications.html"
+          ><i class="bi bi-bell"></i> Notifications</a
+        >
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="section-title mb-0">
+            <i class="bi bi-people text-success"></i> Volunteers
+          </h2>
+
+          <div class="d-flex gap-2">
+            <a
+              href="index.html"
+              class="btn btn-sm btn-outline-secondary d-flex align-items-center"
+              style="font-size: 0.75rem; padding: 4px 10px"
+            >
+              LogOut
+            </a>
+            <button class="btn btn-sm btn-success">
+              <i class="bi bi-person-plus"></i> Join as Volunteer
+            </button>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Vol 1 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="volunteer-card">
+              <div class="volunteer-img"><i class="bi bi-person"></i></div>
+              <h5 class="volunteer-name">Ahmed Ali</h5>
+              <div class="volunteer-role">Event Coordinator</div>
+              <button class="btn-contact">Contact</button>
+            </div>
+          </div>
+
+          <!-- Vol 2 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="volunteer-card">
+              <div class="volunteer-img"><i class="bi bi-person"></i></div>
+              <h5 class="volunteer-name">Sara Khan</h5>
+              <div class="volunteer-role">Lost & Found Manager</div>
+              <button class="btn-contact">Contact</button>
+            </div>
+          </div>
+
+          <!-- Vol 3 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="volunteer-card">
+              <div class="volunteer-img"><i class="bi bi-person"></i></div>
+              <h5 class="volunteer-name">Bilal Raza</h5>
+              <div class="volunteer-role">Complaint Handler</div>
+              <button class="btn-contact">Contact</button>
+            </div>
+          </div>
+
+          <!-- Vol 4 -->
+          <div class="col-md-6 col-lg-3">
+            <div class="volunteer-card">
+              <div class="volunteer-img"><i class="bi bi-person"></i></div>
+              <h5 class="volunteer-name">Zainab</h5>
+              <div class="volunteer-role">General Volunteer</div>
+              <button class="btn-contact">Contact</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

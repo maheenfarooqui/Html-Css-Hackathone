@@ -1,0 +1,265 @@
+/* ===== Global Styles ===== */
+:root {
+  --primary-color: #0057a8; /* Saylani Blue */
+  --secondary-color: #66b032; /* Saylani Green */
+  --light-gray: #f8f9fa;
+  --dark-text: #333333;
+  --muted-text: #6c757d;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden; /* Fix horizontal scrollbar */
+}
+
+/* ===== Full Screen Layout Structure ===== */
+.container-fluid {
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.row.h-100 {
+  height: 100vh;
+}
+
+/* ===== LEFT COLUMN: LOGO AND TEXT (Reverted) ===== */
+.left-column {
+  background: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align to top */
+  align-items: flex-start; /* Align text to left */
+  padding: 50px 80px; /* Reduced top padding to move logo up */
+  height: 100vh;
+}
+
+.branding {
+  margin-bottom: 1rem; /* Reduced margin to pull text closer to logo */
+}
+
+.logo-img {
+  width: 300px;
+  margin-top: -100px;
+}
+
+.main-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+/* Content Wrapper to push text a bit vertically if needed */
+.content-wrapper {
+  /* margin-top: 40px; Optional */
+}
+
+/* Wave Shapes (SVG) */
+.wave-shape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  z-index: 0;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.wave-shape svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===== RIGHT COLUMN: LOGIN FORM (Reverted) ===== */
+.right-column {
+  background-color: #f8f9fa; /* Light background for contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Login Card inside Right Column */
+.login-card {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08); /* Sophisticated shadow */
+  z-index: 2;
+}
+
+/* Form Styles */
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--dark-text);
+  text-align: center; /* Or left? Design has it left aligned sometimes, but centered in card usually. */
+  /* Image has "Login" left aligned in the card? No, looks left aligned in the white card. */
+  text-align: left; /* Changed to left based on image visual */
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted-text);
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(0, 87, 168, 0.1);
+}
+
+/* Role Toggle Segmented Control */
+.role-selector {
+  background: #f1f3f5;
+  padding: 4px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.btn-check:checked + .btn-outline-secondary {
+  background-color: white;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.role-btn {
+  border: none;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  flex: 1;
+  text-align: center;
+  color: var(--muted-text);
+  transition: all 0.2s ease;
+}
+.role-btn:hover {
+  background-color: #e9ecef;
+  color: var(--dark-text);
+}
+
+/* Log In Button */
+.btn-login {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition:
+    transform 0.1s,
+    background-color 0.2s;
+  width: 100%;
+}
+
+.btn-login:hover {
+  background-color: #004485;
+}
+
+.btn-login:active {
+  transform: scale(0.98);
+}
+
+/* Google Button */
+.btn-google {
+  background: white;
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+  width: 100%;
+}
+
+.btn-google:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .left-column {
+    height: auto;
+    min-height: 40vh;
+    padding: 40px 30px; /* Reduced vertical padding */
+    align-items: center;
+    text-align: center; /* Center on mobile */
+  }
+
+  .wave-shape {
+    height: 150px;
+  }
+
+  .logo-img {
+    margin: 0 auto;
+    width: 160px;
+  }
+
+  .right-column {
+    height: auto;
+    min-height: 60vh;
+    padding: 40px 20px;
+  }
+
+  .login-card {
+    box-shadow: none;
+    padding: 20px 0;
+    max-width: 100%;
+  }
+
+  .form-title {
+    text-align: center; /* Center title on mobile */
+  }
+
+  /* Ensure scrolling on mobile */
+  .container-fluid,
+  .row.h-100 {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

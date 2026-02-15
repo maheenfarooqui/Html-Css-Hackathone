@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saylani Campus Portal – Report Lost Item</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      /* Exact Color Codes provided */
+      :root {
+        --saylani-green: #66b032;
+        --saylani-blue: #0057a8;
+        --saylani-white: #ffffff;
+        --light-bg: #f8f9fa;
+        --text-dark: #333333;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        overflow-x: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Sidebar Styling (Matches Student Page style) */
+      .sidebar {
+        background-color: #ffffff;
+        min-height: 100vh;
+        padding-top: 20px;
+        border-right: 1px solid #eee;
+      }
+
+      .sidebar .nav-link {
+        color: #555;
+        font-weight: 600;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 4px;
+        border-radius: 0 24px 24px 0;
+        margin-right: 16px;
+        transition: all 0.2s;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: #f0f0f0;
+        color: var(--saylani-green);
+      }
+
+      /* Make Lost & Found link active for this page */
+      .sidebar .nav-link.active {
+        background-color: var(--saylani-green);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 176, 50, 0.2);
+      }
+
+      .sidebar .nav-link i {
+        font-size: 1.2rem;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        padding: 30px;
+      }
+
+      /* Section Headers */
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Form Card */
+      .form-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        max-width: 900px; /* Or full width */
+      }
+
+      .form-card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: var(--text-dark);
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+      }
+
+      .form-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+      }
+
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        font-size: 0.95rem;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--saylani-green);
+        box-shadow: 0 0 0 4px rgba(102, 176, 50, 0.1);
+      }
+
+      textarea.form-control {
+        resize: none;
+        height: 100px;
+      }
+
+      /* Urgency Radio Styling */
+      .urgency-group {
+        display: flex;
+        gap: 20px;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px 20px;
+      }
+
+      .urgency-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+      }
+
+      .urgency-option:hover {
+        background-color: #f8f9fa;
+      }
+
+      .urgency-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot-low {
+        background-color: var(--saylani-green);
+      }
+      .dot-medium {
+        background-color: #ffc107;
+      }
+      .dot-high {
+        background-color: #dc3545;
+      }
+
+      .form-check-input {
+        margin-top: 0;
+      }
+
+      /* Submit Button */
+      .btn-submit {
+        background-color: #3b82f6; /* Layout blue */
+        background-color: #2563eb; /* Darker blue */
+        /* Reference image button looks like a specific royal blue */
+        background-color: #4361ee; /* Modern blue */
+        color: white;
+        padding: 12px 40px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px; /* Or centered */
+        display: block;
+        margin: 30px auto 0;
+        text-align: center;
+      }
+
+      .btn-submit:hover {
+        background-color: #3a56d4;
+      }
+
+      /* Layout overrides */
+      @media (min-width: 992px) {
+        .sidebar {
+          position: fixed;
+          width: 250px;
+          z-index: 100;
+        }
+        .main-content {
+          margin-left: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar d-none d-lg-block">
+      <div class="px-4 mb-4">
+        <!-- Logo area placeholder -->
+      </div>
+
+      <div class="nav flex-column">
+        <a class="nav-link" href="student.html"
+          ><i class="bi bi-grid"></i> Dashboard</a
+        >
+        <a class="nav-link active" href="report_lost_item.html"
+          ><i class="bi bi-search"></i> Lost &amp; Found</a
+        >
+        <a class="nav-link" href="submit_complaint.html"
+          ><i class="bi bi-file-earmark-text"></i> Complaints</a
+        >
+        <a class="nav-link" href="student_volunteers.html"
+          ><i class="bi bi-people"></i> Volunteers</a
+        >
+        <a class="nav-link" href="student_notifications.html"
+          ><i class="bi bi-bell"></i> Notifications</a
+        >
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container-fluid">
+        <!-- Header with Back Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="section-title mb-0">
+            <i class="bi bi-bag-plus text-success"></i> Lost & Found Report
+          </h2>
+          <a
+            href="student.html"
+            class="btn btn-sm btn-outline-secondary"
+            style="font-size: 0.75rem; padding: 4px 10px"
+            >Back to Dashboard</a
+          >
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-card">
+              <h5 class="form-card-title">Report Lost Item</h5>
+
+              <form>
+                <!-- Item Name -->
+                <div class="mb-4">
+                  <label class="form-label">Item Name</label>
+                  <input type="text" class="form-control" placeholder="" />
+                </div>
+
+                <!-- Category Row -->
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <label class="form-label">Category</label>
+                    <select class="form-select">
+                      <option>Electronics</option>
+                      <option>Clothing</option>
+                      <option>Documents</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">&nbsp;</label>
+                    <!-- Spacer for alignment of second dropdown if needed, or sub-category label -->
+                    <!-- Image shows a second dropdown next to Category. Maybe Sub-category? -->
+                    <select class="form-select">
+                      <option>Mobile Phone</option>
+                      <option>Laptop</option>
+                      <option>Tablet</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" placeholder=""></textarea>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-4">
+                  <label class="form-label">Location</label>
+                  <select class="form-select">
+                    <option>Main Campus - Library</option>
+                    <option>Cafeteria</option>
+                    <option>Auditorium</option>
+                  </select>
+                </div>
+
+                <!-- Urgency -->
+                <div class="mb-4">
+                  <label class="form-label">Urgency</label>
+                  <div class="urgency-group">
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="urgency"
+                        id="urgencyLow"
+                        checked
+                      />
+                      <span class="urgency-dot dot-low"></span>
+                      <span class="fw-semibold">Low</span>
+                    </label>
+
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="urgency"
+                        id="urgencyMedium"
+                      />
+                      <span class="urgency-dot dot-medium"></span>
+                      <span class="fw-semibold">Medium</span>
+                    </label>
+
+                    <label class="urgency-option">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="urgency"
+                        id="urgencyHigh"
+                      />
+                      <span class="urgency-dot dot-high"></span>
+                      <span class="fw-semibold">High</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit">
+                  Submit Complaint
+                </button>
+                <!-- Text as per reference image -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
